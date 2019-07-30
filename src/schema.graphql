@@ -1,0 +1,38 @@
+
+
+type Query {
+    saludo(name:String!):String!
+    getAllPosts:[Post]
+}
+
+type Mutation {
+    createPost(data:inputPost!):Post
+    createUser(data:inputUser!):User
+}
+
+type Post {
+    id:ID
+    title:String!
+    body:String!
+    createdAt:String!
+    user:User!
+}
+
+type User {
+    id:ID
+    name:String!
+    email:String!
+}
+
+input inputPost {
+    title:String!
+    body:String!
+    createdAt:String!
+    user:ID
+}
+
+input inputUser {
+    name:String!
+    email:String!
+    password:String!
+}
