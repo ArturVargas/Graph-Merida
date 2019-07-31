@@ -1,13 +1,15 @@
-
+directive @auth on FIELD_DEFINITION | FIELD
 
 type Query {
-    saludo(name:String!):String!
     getAllPosts:[Post]
+    getPost(id:ID!):Post
+    getUsers:[User] @auth
 }
 
 type Mutation {
     createPost(data:inputPost!):Post
     createUser(data:inputUser!):User
+    login(data:inputLogin!):Auth
 }
 
 type Post {
@@ -24,6 +26,11 @@ type User {
     email:String!
 }
 
+type Auth {
+    token:String!
+    message:String!
+}
+
 input inputPost {
     title:String!
     body:String!
@@ -33,6 +40,11 @@ input inputPost {
 
 input inputUser {
     name:String!
+    email:String!
+    password:String!
+}
+
+input inputLogin {
     email:String!
     password:String!
 }

@@ -1,6 +1,7 @@
 
 const Post = require('../models/Post');
 const User = require('../models/User');
+const authenticated = require('../utils/authenticated');
 
 const createPost = async (root, args) => {
     let newPost = new Post({
@@ -22,9 +23,19 @@ const createUser = async(root, args) => {
     return user;
 }
 
+const login = async(root, args) => {
+    const token = await authenticated(args)
+        .catch((err) => new Error(err))
+    return {
+        token,
+        message: 'Ok'
+    }
+}
+
 
 
 module.exports = {
     createPost,
-    createUser
+    createUser,
+    login
 }
