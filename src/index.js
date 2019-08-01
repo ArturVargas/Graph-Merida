@@ -5,7 +5,7 @@ const { importSchema } = require('graphql-import');
 const { makeExecutableSchema } = require('graphql-tools');
 const typeDefs = importSchema('./src/schema.graphql');
 const { AuthDirective } = require('./resolvers/directive');
- const verifyToken = require('./utils/verifyToken');
+const verifyToken = require('./utils/verifyToken');
 const mongoose = require('mongoose');
 
 mongoose.connect(process.env.MONGO_Url, {useNewUrlParser: true}, (err) => {
@@ -15,7 +15,7 @@ mongoose.connect(process.env.MONGO_Url, {useNewUrlParser: true}, (err) => {
 })
 
 const { getAllPosts, getPost, getUsers } = require('./resolvers/Querys');
-const { createPost, createUser, login } = require('./resolvers/Mutations');
+const { createPost, createUser, login, addPhoto } = require('./resolvers/Mutations');
 
 const resolvers = {
     Query: {
@@ -26,7 +26,8 @@ const resolvers = {
     Mutation: {
         createPost,
         createUser,
-        login 
+        login,
+        addPhoto 
     }
   }
 

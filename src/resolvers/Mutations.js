@@ -2,6 +2,7 @@
 const Post = require('../models/Post');
 const User = require('../models/User');
 const authenticated = require('../utils/authenticated');
+const storage = require('../utils/storage');
 
 const createPost = async (root, args) => {
     let newPost = new Post({
@@ -32,10 +33,20 @@ const login = async(root, args) => {
     }
 }
 
-
+const addPhoto = async(root, args) => {
+    console.log(args);
+    if(args.photo){
+        const { createReadStream } = await args.photo;
+        const stream = createReadStream();
+        console.log('Strema ==>> ',stream);
+        const url = await storage({stream})
+        console.log(url)
+    }
+}
 
 module.exports = {
     createPost,
     createUser,
-    login
+    login,
+    addPhoto
 }

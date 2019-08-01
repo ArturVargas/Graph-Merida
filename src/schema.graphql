@@ -1,4 +1,6 @@
 directive @auth on FIELD_DEFINITION | FIELD
+scalar Upload
+
 
 type Query {
     getAllPosts:[Post]
@@ -10,6 +12,7 @@ type Mutation {
     createPost(data:inputPost!):Post
     createUser(data:inputUser!):User
     login(data:inputLogin!):Auth
+    addPhoto(photo:Upload!):String
 }
 
 type Post {
